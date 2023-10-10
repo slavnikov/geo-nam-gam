@@ -3,10 +3,12 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CookieMandaterMiddleware } from './cookie-mandater/cookie-mandater.middleware';
+import { GameModule } from './game/game.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    GameModule,
   ],
   controllers: [AppController],
   providers: [AppService],
