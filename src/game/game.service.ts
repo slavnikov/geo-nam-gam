@@ -4,7 +4,7 @@ import { Game } from './entities/game.entity';
 
 @Injectable()
 export class GameService {
-  readonly gameCache: {[key: string]: Game} = {};
+  private readonly gameCache: {[key: string]: Game} = {};
   
   create(): string {
     const newGame: Game = new Game();
