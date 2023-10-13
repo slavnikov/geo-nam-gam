@@ -1,15 +1,20 @@
 import { Injectable } from '@nestjs/common';
-import { CreateGameDto } from './dto/create-game.dto';
 import { UpdateGameDto } from './dto/update-game.dto';
+import { Game } from './entities/game.entity';
 
 @Injectable()
 export class GameService {
-  create(createGameDto: CreateGameDto) {
-    return 'This action adds a new game';
+  readonly gameCache: {[key: string]: Game} = {};
+  
+  create(): string {
+    const newGame: Game = new Game();
+
+    this.gameCache[newGame.id] = newGame;
+    return newGame.id;
   }
 
-  findAll() {
-    return `This action returns all game`;
+  findAll(): string[] {
+    return Object.keys(this.gameCache);
   }
 
   findOne(id: number) {
