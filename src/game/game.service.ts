@@ -1,16 +1,25 @@
 import { Injectable } from '@nestjs/common';
+import {WsException} from '@nestjs/websockets';
+import WebSocket from 'ws';
 import { UpdateGameDto } from './dto/update-game.dto';
 import { Game } from './entities/game.entity';
 
 @Injectable()
 export class GameService {
-  private readonly gameCache: {[key: string]: Game} = {};
+  private readonly gameCache: Map<string, Game> = new Map();
   
   create(): string {
     const newGame: Game = new Game();
 
     this.gameCache[newGame.id] = newGame;
     return newGame.id;
+  }
+  
+  joinGame(gameId: string, playerId: string, playerWs: WebSocket) {
+    if(this.gameCache.has(gameId))
+      throw new WsExceptioni('Failed to find game by id.');
+
+
   }
 
   findAll(): string[] {

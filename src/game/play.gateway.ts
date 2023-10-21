@@ -4,12 +4,15 @@ import {IncomingMessage} from 'http';
 import WebSocket, {WebSocketServer as wsWebSocketServer} from 'ws';
 
 import * as cookieParser from 'cookie-parser';
+import {GameService} from './game.service';
 
 @WebSocketGateway()
 export class PlayGateway implements OnModuleInit {
   @WebSocketServer()
   server: wsWebSocketServer;
   playerCache: WeakMap<WebSocket, string> = new WeakMap();
+
+  constructor(private gameService: GameService) { }
 
   onModuleInit() {
     this.server.on('connection', (ws: WebSocket, req: IncomingMessage) => {
@@ -31,5 +34,10 @@ export class PlayGateway implements OnModuleInit {
   @SubscribeMessage('ping')
   ping(@ConnectedSocket() client: WebSocket, @MessageBody() payload: string): string {
     return this.playerCache.get(client);
+  }
+
+  @SubscribeMessage('join')
+  joinGame(@ConnectedSocket() client: WebSocket, @MessageBody('gameId') gameId: string): void {
+
   }
 }
