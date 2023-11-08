@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Geo-Nam-Gam</title>
+        <script>
+            const ws = new WebSocket('ws://localhost:3000');
+
+            ws.addEventListener('open', e => {
+                console.log('Established connection!');
+                ws.send(JSON.stringify({event:'ping'}));
+                //ws.close();
+            });
+            ws.addEventListener('close', e => {
+                console.log('Closed connection!');
+            });
+
+            ws.addEventListener('message', e => {
+              console.log(e.data);
+            });
+
+            const ping = () => {
+              ws.send(JSON.stringify({event:'ping'}));
+            }
+
+            const echo = (document) => {
+              const input = document.getElementById('echoInput').value;
+              ws.send(JSON.stringify({event:'echo', data: input}));
+            }
+        </script>
+    </head>
+    <body>
+        <h1>geo-nam-gam</h1>
+        <button id="pingButton">PING!</button>
+        <input type="text" id="echoInput"/>
+        <button id="echoButton">ECHO!</button>
+        <script>
+            document.getElementById('pingButton').addEventListener('click', ping);
+            document.getElementById('echoButton').addEventListener('click', () => echo(document));
+        </script>
+    </body>
+</html>

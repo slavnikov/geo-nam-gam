@@ -1,7 +1,7 @@
 import {OnModuleInit} from '@nestjs/common';
 import { ConnectedSocket, MessageBody, SubscribeMessage, WebSocketGateway, WebSocketServer, WsException } from '@nestjs/websockets';
 import {IncomingMessage} from 'http';
-import WebSocket, {WebSocketServer as wsWebSocketServer} from 'ws';
+import WebSocket, {WebSocketServer as WSServer} from 'ws';
 
 import * as cookieParser from 'cookie-parser';
 import {GameService} from './game.service';
@@ -9,7 +9,7 @@ import {GameService} from './game.service';
 @WebSocketGateway()
 export class PlayGateway implements OnModuleInit {
   @WebSocketServer()
-  server: wsWebSocketServer;
+  server: WSServer;
   playerCache: WeakMap<WebSocket, string> = new WeakMap();
 
   constructor(private gameService: GameService) { }
@@ -32,8 +32,17 @@ export class PlayGateway implements OnModuleInit {
   }
 
   @SubscribeMessage('ping')
-  ping(@ConnectedSocket() client: WebSocket, @MessageBody() payload: string): string {
-    return this.playerCache.get(client);
+  ping(@ConnectedSocket() client: WebSocket): string {
+    const playerCookie = this.playerCache.get(client);
+
+    console.log(`Pinging back to '${playerCookie}'`);
+    return playerCookie;
+  }
+
+  @SubscribeMessage('echo')
+  echo(@ConnectedSocket() client: WebSocket, @MessageBody() payload: string): string {
+    console.log(`Echoing "${payload}"`);
+    return payload;
   }
 
   @SubscribeMessage('join')

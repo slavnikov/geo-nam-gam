@@ -17,9 +17,7 @@ export class GameService {
   
   joinGame(gameId: string, playerId: string, playerWs: WebSocket) {
     if(this.gameCache.has(gameId))
-      throw new WsExceptioni('Failed to find game by id.');
-
-
+      throw new WsException('Failed to find game by id.');
   }
 
   findAll(): string[] {
