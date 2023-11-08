@@ -8,7 +8,6 @@
             ws.addEventListener('open', e => {
                 console.log('Established connection!');
                 ws.send(JSON.stringify({event:'ping'}));
-                //ws.close();
             });
             ws.addEventListener('close', e => {
                 console.log('Closed connection!');
@@ -26,6 +25,14 @@
               const input = document.getElementById('echoInput').value;
               ws.send(JSON.stringify({event:'echo', data: input}));
             }
+
+            const createGame = async () => {
+              const res = await fetch('/game', {method: 'POST'});
+              const gameId = await res.text();
+
+              document.getElementById('gameId').innerHTML = gameId;
+              console.log(gameId);
+            }
         </script>
     </head>
     <body>
@@ -33,9 +40,13 @@
         <button id="pingButton">PING!</button>
         <input type="text" id="echoInput"/>
         <button id="echoButton">ECHO!</button>
+        <button id="createGameButton">Create Game!</button>
+        <h3 id="gameId"/>
+
         <script>
             document.getElementById('pingButton').addEventListener('click', ping);
             document.getElementById('echoButton').addEventListener('click', () => echo(document));
+            document.getElementById('createGameButton').addEventListener('click', createGame.bind(this));
         </script>
     </body>
 </html>
