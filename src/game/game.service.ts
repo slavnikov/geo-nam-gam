@@ -9,15 +9,22 @@ export class GameService {
   private readonly gameCache: Map<string, Game> = new Map();
   
   create(): string {
-    const newGame: Game = new Game();
+    let newGame: Game = new Game();
+    
+    while(this.gameCache.has(newGame.id))
+      newGame = new Game();
 
-    this.gameCache[newGame.id] = newGame;
+    this.gameCache.set(newGame.id, newGame);
     return newGame.id;
   }
   
   joinGame(gameId: string, playerId: string, playerWs: WebSocket) {
-    if(this.gameCache.has(gameId))
+    const game: Game = this.gameCache.get(gameId);
+
+    if(!game)
       throw new WsException('Failed to find game by id.');
+
+    game.join(playerId, playerWs);
   }
 
   findAll(): string[] {
