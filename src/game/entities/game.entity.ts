@@ -22,4 +22,15 @@ export class Game {
     }
     console.log(`Added player '${playerId}' to game '${this.id}'.`);
   }
+
+  leave(playerId: string) {
+    if(this.player1id === playerId) {
+      this.player1id = null;
+      this.player1ws = null;
+    } else if (this.player2id === playerId) {
+      this.player2id = null;
+      this.player2ws = null;
+    }
+  }
+
 }

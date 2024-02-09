@@ -10,17 +10,13 @@ import {GameService} from './game.service';
 export class PlayGateway implements OnModuleInit {
   @WebSocketServer()
   server: WSServer;
-  playerCache: WeakMap<WebSocket, string> = new WeakMap();
+  playerCache: Map<WebSocket, string> = new Map();
 
   constructor(private gameService: GameService) { }
 
   onModuleInit() {
     this.server.on('connection', (ws: WebSocket, req: IncomingMessage) => {
-      const cookie: string = req.headers.cookie || "";
-      const cookies: string[] = cookie.split('; ');
-      const idCookie: string|false = cookies.find(cookie => cookie.startsWith('cookie_id'));
-      const signedIdCookieVal: string|false = idCookie && idCookie.split('=')[1].replace('s%3A', 's:');
-      const idCookieVal: string|false = signedIdCookieVal && cookieParser.signedCookie(signedIdCookieVal, process.env.COOKIE_SECRET);
+      const idCookieVal: string|false = this.extractCookieIdFromSocket(req);
 
       if(idCookieVal) {
         this.playerCache.set(ws, idCookieVal);
@@ -29,20 +25,13 @@ export class PlayGateway implements OnModuleInit {
         throw new WsException('Failed to establish connection identity;');
       }
     });
-  }
 
-  @SubscribeMessage('ping')
-  ping(@ConnectedSocket() client: WebSocket): string {
-    const playerCookie = this.playerCache.get(client);
+    this.server.on('close', (ws: WebSocket) => {
+      const idCookieVal: string = this.playerCache.get(ws);
 
-    console.log(`Pinging back to '${playerCookie}'`);
-    return playerCookie;
-  }
-
-  @SubscribeMessage('echo')
-  echo(@ConnectedSocket() client: WebSocket, @MessageBody() payload: string): string {
-    console.log(`Echoing "${payload}"`);
-    return payload;
+      this.gameService.leavePlay(idCookieVal);
+      this.playerCache.delete(ws);
+    })
   }
 
   @SubscribeMessage('join')
@@ -54,5 +43,29 @@ export class PlayGateway implements OnModuleInit {
     } catch (wsErr: any) {
       playerWs.send(JSON.stringify({event: 'error'}));
     }
+  }
+
+  extractCookieIdFromSocket(req: IncomingMessage): string|false {
+    const cookie: string = req.headers.cookie || "";
+    const cookies: string[] = cookie.split('; ');
+    const idCookie: string|false = cookies.find(cookie => cookie.startsWith('cookie_id'));
+    const signedIdCookieVal: string|false = idCookie && idCookie.split('=')[1].replace('s%3A', 's:');
+    const idCookieVal: string|false = signedIdCookieVal && cookieParser.signedCookie(signedIdCookieVal, process.env.COOKIE_SECRET);
+
+    return idCookieVal;
+  }
+
+  @SubscribeMessage('ping')
+  ping(@ConnectedSocket() client: WebSocket): string {
+    const playerCookie = this.playerCache.get(client);
+
+    console.log(`Pinging back to '${playerCookie}'`);
+    return playerCookie;
+  }
+
+  @SubscribeMessage('echo')
+  echo(@ConnectedSocket() _: WebSocket, @MessageBody() payload: string): string {
+    console.log(`Echoing "${payload}"`);
+    return payload;
   }
 }

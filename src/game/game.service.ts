@@ -7,6 +7,7 @@ import { Game } from './entities/game.entity';
 @Injectable()
 export class GameService {
   private readonly gameCache: Map<string, Game> = new Map();
+  private readonly userIdToGame: Map<string, Game> = new Map();
   
   create(): string {
     let newGame: Game = new Game();
@@ -23,8 +24,18 @@ export class GameService {
 
     if(!game)
       throw new WsException('Failed to find game by id.');
+    if(this.userIdToGame.has(playerId))
+      throw new WsException('User cannot join more than one game at a time.');
 
     game.join(playerId, playerWs);
+    this.userIdToGame.set(playerId, game);
+  }
+
+  leavePlay(playerId: string) {
+    const game: Game|undefined = this.userIdToGame.get(playerId);
+
+    if(game)
+      game.leave(playerId);
   }
 
   findAll(): string[] {
