@@ -1,0 +1,42 @@
+<mxfile host="app.diagrams.net" modified="2024-02-10T23:49:22.988Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="dLOj9Dz12pjRlrjv48lC" version="23.1.2" type="device">
+  <diagram name="Page-1" id="eWNFTODbsNEbKW2weoXc">
+    <mxGraphModel dx="853" dy="420" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="jf6anLaMxtP3-ds537sN-1" value="&amp;lt;&amp;lt;Middleware&amp;gt;&amp;gt;&lt;br&gt;:CookieMandater" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="260" y="40" width="100" height="410" as="geometry" />
+        </mxCell>
+        <mxCell id="jf6anLaMxtP3-ds537sN-3" value="use(req: Request, res: Response)" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;rounded=0;" edge="1" parent="1" target="jf6anLaMxtP3-ds537sN-1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="80" y="130" as="sourcePoint" />
+            <mxPoint x="260" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="jf6anLaMxtP3-ds537sN-4" value="cookieId = getCookeId(req: Request): string" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;rounded=0;" edge="1" parent="1" source="jf6anLaMxtP3-ds537sN-1" target="jf6anLaMxtP3-ds537sN-1">
+          <mxGeometry x="-0.3323" width="160" relative="1" as="geometry">
+            <mxPoint x="335" y="160" as="sourcePoint" />
+            <mxPoint x="495" y="160" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="470" y="170" />
+              <mxPoint x="470" y="230" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="jf6anLaMxtP3-ds537sN-6" value="&amp;lt;&amp;lt;HTMLResponse&amp;gt;&amp;gt;&lt;br&gt;res:Response" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="590" y="40" width="120" height="410" as="geometry" />
+        </mxCell>
+        <mxCell id="jf6anLaMxtP3-ds537sN-7" value="cookie(&#39;cookie_id&#39;, cookieId, {signed: true})" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;rounded=0;" edge="1" parent="1" source="jf6anLaMxtP3-ds537sN-1" target="jf6anLaMxtP3-ds537sN-6">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="330" y="310" as="sourcePoint" />
+            <mxPoint x="490" y="310" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="430" y="310" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
