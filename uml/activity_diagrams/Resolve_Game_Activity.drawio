@@ -1,0 +1,55 @@
+<mxfile host="app.diagrams.net" modified="2024-01-24T02:14:30.166Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="dum-DXW3z7HENqeJmSKS" version="23.0.0" type="dropbox">
+  <diagram name="Page-1" id="GY5woArtewsTeStQieaP">
+    <mxGraphModel dx="674" dy="350" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="rApSY0qO-RPaJ-NSF46p-1" value="Resolve Game Activity" style="html=1;dashed=0;whiteSpace=wrap;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="40" y="30" width="540" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="rApSY0qO-RPaJ-NSF46p-2" value="" style="ellipse;fillColor=strokeColor;html=1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="85" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rApSY0qO-RPaJ-NSF46p-3" value="" style="endArrow=open;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;labelBackgroundColor=none;strokeWidth=1;rounded=0;" edge="1" parent="1" source="rApSY0qO-RPaJ-NSF46p-2" target="rApSY0qO-RPaJ-NSF46p-5">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="330" y="210" as="sourcePoint" />
+            <mxPoint x="490" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rApSY0qO-RPaJ-NSF46p-4" value="Record a win for the last active player." style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="390" y="80" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="rApSY0qO-RPaJ-NSF46p-5" value="" style="rhombus;" vertex="1" parent="1">
+          <mxGeometry x="170" y="85" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rApSY0qO-RPaJ-NSF46p-7" value="[only one player left]" style="endArrow=open;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;labelBackgroundColor=none;strokeWidth=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="rApSY0qO-RPaJ-NSF46p-5" target="rApSY0qO-RPaJ-NSF46p-4">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="340" y="110" as="sourcePoint" />
+            <mxPoint x="500" y="110" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rApSY0qO-RPaJ-NSF46p-9" value="" style="ellipse;html=1;shape=endState;fillColor=strokeColor;" vertex="1" parent="1">
+          <mxGeometry x="280" y="160" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rApSY0qO-RPaJ-NSF46p-10" value="[else]" style="endArrow=open;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;labelBackgroundColor=none;strokeWidth=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="rApSY0qO-RPaJ-NSF46p-5" target="rApSY0qO-RPaJ-NSF46p-9">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="340" y="260" as="sourcePoint" />
+            <mxPoint x="500" y="260" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="185" y="175" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rApSY0qO-RPaJ-NSF46p-11" value="" style="endArrow=open;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;labelBackgroundColor=none;strokeWidth=1;rounded=0;" edge="1" parent="1" source="rApSY0qO-RPaJ-NSF46p-4" target="rApSY0qO-RPaJ-NSF46p-9">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="340" y="260" as="sourcePoint" />
+            <mxPoint x="500" y="260" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="460" y="175" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

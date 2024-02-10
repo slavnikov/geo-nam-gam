@@ -1,0 +1,127 @@
+<mxfile host="app.diagrams.net" modified="2024-01-24T02:14:31.958Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="smD9Xkxdhbv8Pa373rBy" version="23.0.0" type="dropbox">
+  <diagram name="Page-1" id="UeqwFaz1clsZOebg-53g">
+    <mxGraphModel dx="1149" dy="596" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="dL-R9qwjyb9--v0cQ5pH-1" value="Disconnect Activity" style="html=1;dashed=0;whiteSpace=wrap;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="70" y="60" width="740" height="600" as="geometry" />
+        </mxCell>
+        <mxCell id="dL-R9qwjyb9--v0cQ5pH-2" value="WebSocket Closure" style="html=1;shape=mxgraph.infographic.ribbonSimple;notch1=20;notch2=0;align=center;verticalAlign=middle;fontSize=14;fontStyle=0;fillColor=#FFFFFF;flipH=0;spacingRight=0;spacingLeft=14;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="10" y="120" width="170" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="dL-R9qwjyb9--v0cQ5pH-3" value="Determine the player ID." style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="270" y="115" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="dL-R9qwjyb9--v0cQ5pH-4" value="" style="endArrow=open;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;labelBackgroundColor=none;strokeWidth=1;rounded=0;" edge="1" parent="1" target="dL-R9qwjyb9--v0cQ5pH-3" source="dL-R9qwjyb9--v0cQ5pH-2">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="190" y="105" as="sourcePoint" />
+            <mxPoint x="560" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dL-R9qwjyb9--v0cQ5pH-5" value="" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;rounded=0;" edge="1" parent="1" source="dL-R9qwjyb9--v0cQ5pH-3">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="529" y="115" as="sourcePoint" />
+            <mxPoint x="430" y="30" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dL-R9qwjyb9--v0cQ5pH-6" value="" style="rhombus;" vertex="1" parent="1">
+          <mxGeometry x="305" y="205" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="dL-R9qwjyb9--v0cQ5pH-7" value="" style="endArrow=open;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;labelBackgroundColor=none;strokeWidth=1;rounded=0;" edge="1" parent="1" source="dL-R9qwjyb9--v0cQ5pH-3" target="dL-R9qwjyb9--v0cQ5pH-6">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="340" y="130" as="sourcePoint" />
+            <mxPoint x="500" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dL-R9qwjyb9--v0cQ5pH-8" value="Leave Game" style="shape=mxgraph.uml25.behaviorAction;html=1;rounded=1;absoluteArcSize=1;arcSize=10;align=left;spacingLeft=5;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="610" y="350" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="dL-R9qwjyb9--v0cQ5pH-9" value="[user is in a game]" style="endArrow=open;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;labelBackgroundColor=none;strokeWidth=1;rounded=0;" edge="1" parent="1" source="dL-R9qwjyb9--v0cQ5pH-6" target="dL-R9qwjyb9--v0cQ5pH-10">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="190" y="150" as="sourcePoint" />
+            <mxPoint x="280" y="150" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="545" y="220" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dL-R9qwjyb9--v0cQ5pH-10" value="" style="rhombus;" vertex="1" parent="1">
+          <mxGeometry x="530" y="280" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="dL-R9qwjyb9--v0cQ5pH-11" value="[else]" style="endArrow=open;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;labelBackgroundColor=none;strokeWidth=1;rounded=0;" edge="1" parent="1" source="dL-R9qwjyb9--v0cQ5pH-10" target="dL-R9qwjyb9--v0cQ5pH-8">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="540" y="340" as="sourcePoint" />
+            <mxPoint x="700" y="340" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="680" y="295" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dL-R9qwjyb9--v0cQ5pH-12" value="Close Game" style="shape=mxgraph.uml25.behaviorAction;html=1;rounded=1;absoluteArcSize=1;arcSize=10;align=left;spacingLeft=5;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="335" y="340" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="dL-R9qwjyb9--v0cQ5pH-13" value="[player is game owner]" style="endArrow=open;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;labelBackgroundColor=none;strokeWidth=1;rounded=0;" edge="1" parent="1" source="dL-R9qwjyb9--v0cQ5pH-10" target="dL-R9qwjyb9--v0cQ5pH-12">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="400" y="400" as="sourcePoint" />
+            <mxPoint x="560" y="400" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="405" y="295" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dL-R9qwjyb9--v0cQ5pH-14" value="" style="rhombus;" vertex="1" parent="1">
+          <mxGeometry x="530" y="440" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="dL-R9qwjyb9--v0cQ5pH-15" value="" style="endArrow=open;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;labelBackgroundColor=none;strokeWidth=1;rounded=0;" edge="1" parent="1" source="dL-R9qwjyb9--v0cQ5pH-12" target="dL-R9qwjyb9--v0cQ5pH-14">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="340" y="300" as="sourcePoint" />
+            <mxPoint x="500" y="300" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="405" y="455" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dL-R9qwjyb9--v0cQ5pH-16" value="" style="endArrow=open;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;labelBackgroundColor=none;strokeWidth=1;rounded=0;" edge="1" parent="1" source="dL-R9qwjyb9--v0cQ5pH-8" target="dL-R9qwjyb9--v0cQ5pH-14">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="500" y="400" as="sourcePoint" />
+            <mxPoint x="660" y="400" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="680" y="455" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dL-R9qwjyb9--v0cQ5pH-17" value="Remove user from WebSocket registry." style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="130" y="480" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="dL-R9qwjyb9--v0cQ5pH-18" value="[else]" style="endArrow=open;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;labelBackgroundColor=none;strokeWidth=1;rounded=0;" edge="1" parent="1" source="dL-R9qwjyb9--v0cQ5pH-6" target="dL-R9qwjyb9--v0cQ5pH-17">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="415" y="410" as="sourcePoint" />
+            <mxPoint x="540" y="465" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="180" y="220" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dL-R9qwjyb9--v0cQ5pH-19" value="" style="endArrow=open;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;labelBackgroundColor=none;strokeWidth=1;rounded=0;" edge="1" parent="1" source="dL-R9qwjyb9--v0cQ5pH-14" target="dL-R9qwjyb9--v0cQ5pH-17">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="425" y="420" as="sourcePoint" />
+            <mxPoint x="550" y="475" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="545" y="510" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dL-R9qwjyb9--v0cQ5pH-23" value="" style="ellipse;html=1;shape=endState;fillColor=strokeColor;" vertex="1" parent="1">
+          <mxGeometry x="165" y="590" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="dL-R9qwjyb9--v0cQ5pH-24" value="" style="endArrow=open;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;labelBackgroundColor=none;strokeWidth=1;rounded=0;" edge="1" parent="1" source="dL-R9qwjyb9--v0cQ5pH-17" target="dL-R9qwjyb9--v0cQ5pH-23">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="330" y="400" as="sourcePoint" />
+            <mxPoint x="490" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

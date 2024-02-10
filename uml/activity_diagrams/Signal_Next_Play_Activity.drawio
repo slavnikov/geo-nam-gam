@@ -1,0 +1,55 @@
+<mxfile host="app.diagrams.net" modified="2024-01-24T02:14:28.380Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="9pmmdd6cPiqihxKKgvRn" version="23.0.0" type="dropbox">
+  <diagram name="Page-1" id="lQigHM9XeCfLBluTothZ">
+    <mxGraphModel dx="977" dy="507" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="fexbRBN1tVitoEa7nnUb-10" value="Playout Next Turn Activity" style="html=1;dashed=0;whiteSpace=wrap;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="50" y="60" width="770" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="fexbRBN1tVitoEa7nnUb-1" value="Signal the current player what the play was and solicit return play." style="html=1;shape=mxgraph.infographic.ribbonSimple;notch1=0;notch2=20;align=center;verticalAlign=middle;fontSize=14;fontStyle=0;fillColor=#FFFFFF;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="200" y="110" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="fexbRBN1tVitoEa7nnUb-2" value="X sec&lt;br&gt;(game config)" style="shape=collate;html=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="130" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="fexbRBN1tVitoEa7nnUb-3" value="" style="endArrow=open;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;labelBackgroundColor=none;strokeWidth=1;rounded=0;" edge="1" parent="1" source="fexbRBN1tVitoEa7nnUb-1" target="fexbRBN1tVitoEa7nnUb-2">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="180" y="-80" as="sourcePoint" />
+            <mxPoint x="235" y="-80" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fexbRBN1tVitoEa7nnUb-4" value="Register Loss" style="shape=mxgraph.uml25.behaviorAction;html=1;rounded=1;absoluteArcSize=1;arcSize=10;align=left;spacingLeft=5;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="560" y="120" width="145" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fexbRBN1tVitoEa7nnUb-5" value="" style="endArrow=open;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;labelBackgroundColor=none;strokeWidth=1;rounded=0;" edge="1" parent="1" source="fexbRBN1tVitoEa7nnUb-2" target="fexbRBN1tVitoEa7nnUb-4">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="150" y="100" as="sourcePoint" />
+            <mxPoint x="235" y="100" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fexbRBN1tVitoEa7nnUb-6" value="" style="ellipse;fillColor=strokeColor;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="135" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fexbRBN1tVitoEa7nnUb-7" value="" style="ellipse;html=1;shape=endState;fillColor=strokeColor;" vertex="1" parent="1">
+          <mxGeometry x="770" y="135" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fexbRBN1tVitoEa7nnUb-8" value="" style="endArrow=open;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;labelBackgroundColor=none;strokeWidth=1;rounded=0;" edge="1" parent="1" source="fexbRBN1tVitoEa7nnUb-6" target="fexbRBN1tVitoEa7nnUb-1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="360" y="160" as="sourcePoint" />
+            <mxPoint x="450" y="160" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fexbRBN1tVitoEa7nnUb-9" value="" style="endArrow=open;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;labelBackgroundColor=none;strokeWidth=1;rounded=0;" edge="1" parent="1" source="fexbRBN1tVitoEa7nnUb-4" target="fexbRBN1tVitoEa7nnUb-7">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="370" y="170" as="sourcePoint" />
+            <mxPoint x="460" y="170" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

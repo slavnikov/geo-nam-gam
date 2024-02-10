@@ -1,0 +1,70 @@
+<mxfile host="app.diagrams.net" modified="2024-01-24T02:14:13.301Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="FkndWUMo72_M7CAu9cRe" version="22.1.18" type="dropbox">
+  <diagram name="Page-1" id="L1z5VHf9s9Gt8rIOleoB">
+    <mxGraphModel dx="977" dy="507" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="sGsHSOSgmfZaLpwTUkf--1" value="Create Game Activity" style="html=1;dashed=0;whiteSpace=wrap;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="55" y="30" width="730" height="470" as="geometry" />
+        </mxCell>
+        <mxCell id="sGsHSOSgmfZaLpwTUkf--13" value="Create a game owned by the requesting user." style="html=1;align=center;verticalAlign=middle;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="195" y="190" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="sGsHSOSgmfZaLpwTUkf--24" value="Register game by id." style="html=1;align=center;verticalAlign=middle;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="400" y="190" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="sGsHSOSgmfZaLpwTUkf--30" value="Join Game&lt;br&gt;(by requesting&lt;br&gt;user)" style="shape=mxgraph.uml25.behaviorAction;html=1;rounded=1;absoluteArcSize=1;arcSize=10;align=left;spacingLeft=5;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="610" y="285" width="145" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="sGsHSOSgmfZaLpwTUkf--32" value="" style="endArrow=open;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;labelBackgroundColor=none;strokeWidth=1;rounded=0;" edge="1" parent="1" source="sGsHSOSgmfZaLpwTUkf--55" target="sGsHSOSgmfZaLpwTUkf--30">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="569.28" y="221.46000000000004" as="sourcePoint" />
+            <mxPoint x="428.5" y="368" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sGsHSOSgmfZaLpwTUkf--35" value="" style="endArrow=open;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;labelBackgroundColor=none;strokeWidth=1;rounded=0;" edge="1" parent="1" source="sGsHSOSgmfZaLpwTUkf--30" target="sGsHSOSgmfZaLpwTUkf--56">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="312.5" y="134" as="sourcePoint" />
+            <mxPoint x="567.5" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sGsHSOSgmfZaLpwTUkf--43" value="Determine User ID associated with the signal socket (in order to assign ownership)" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="195" y="80" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="sGsHSOSgmfZaLpwTUkf--48" value="" style="endArrow=open;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;labelBackgroundColor=none;strokeWidth=1;rounded=0;" edge="1" parent="1" source="sGsHSOSgmfZaLpwTUkf--54" target="sGsHSOSgmfZaLpwTUkf--43">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="145" y="112" as="sourcePoint" />
+            <mxPoint x="475" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sGsHSOSgmfZaLpwTUkf--49" value="" style="endArrow=open;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;labelBackgroundColor=none;strokeWidth=1;rounded=0;" edge="1" parent="1" source="sGsHSOSgmfZaLpwTUkf--43" target="sGsHSOSgmfZaLpwTUkf--13">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="315" y="320" as="sourcePoint" />
+            <mxPoint x="475" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sGsHSOSgmfZaLpwTUkf--50" value="" style="endArrow=open;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;labelBackgroundColor=none;strokeWidth=1;rounded=0;" edge="1" parent="1" source="sGsHSOSgmfZaLpwTUkf--13" target="sGsHSOSgmfZaLpwTUkf--24">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="315" y="320" as="sourcePoint" />
+            <mxPoint x="475" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sGsHSOSgmfZaLpwTUkf--51" value="" style="endArrow=open;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;labelBackgroundColor=none;strokeWidth=1;rounded=0;" edge="1" parent="1" source="sGsHSOSgmfZaLpwTUkf--24" target="sGsHSOSgmfZaLpwTUkf--55">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="315" y="320" as="sourcePoint" />
+            <mxPoint x="600.3600000000001" y="219.2349999999999" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sGsHSOSgmfZaLpwTUkf--54" value="WebSocket Create-Game Signal" style="html=1;shape=mxgraph.infographic.ribbonSimple;notch1=20;notch2=0;align=center;verticalAlign=middle;fontSize=14;fontStyle=0;fillColor=#FFFFFF;flipH=0;spacingRight=0;spacingLeft=14;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="20" y="77.5" width="120" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="sGsHSOSgmfZaLpwTUkf--55" value="Send user an acknowledgement of game creation." style="html=1;shape=mxgraph.infographic.ribbonSimple;notch1=0;notch2=20;align=center;verticalAlign=middle;fontSize=14;fontStyle=0;fillColor=#FFFFFF;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="390" y="280" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="sGsHSOSgmfZaLpwTUkf--56" value="" style="ellipse;html=1;shape=endState;fillColor=strokeColor;" vertex="1" parent="1">
+          <mxGeometry x="667.5" y="420" width="30" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
