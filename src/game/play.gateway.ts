@@ -45,7 +45,7 @@ export class PlayGateway implements OnModuleInit {
     }
   }
 
-  extractCookieIdFromSocket(req: IncomingMessage): string|false {
+  private extractCookieIdFromSocket(req: IncomingMessage): string|false {
     const cookie: string = req.headers.cookie || "";
     const cookies: string[] = cookie.split('; ');
     const idCookie: string|false = cookies.find(cookie => cookie.startsWith('cookie_id'));
