@@ -43,4 +43,12 @@ describe('CookieMandaterMiddleware', () => {
     expect(cookieSetter_mock)
       .toHaveBeenCalledWith(cookieIdKey, mockCookieVal, {signed: true});
   });
+
+  it('should be able to remove non ASCII chars from a cookie', () => {
+    const badCookie: string = 's%3A8c48fcfa-065e-4955-a61a-e43613015f12.A1qK%2BSYNy%2F83y0GT3J1cJvu09fwp63aXLsI%2FUk0z2G8';
+    const testCookie: string = CookieMandaterMiddleware.removeNonASCIIChars(badCookie);
+    const goodCookie: string = 's:8c48fcfa-065e-4955-a61a-e43613015f12.A1qK+SYNy/83y0GT3J1cJvu09fwp63aXLsI/Uk0z2G8'
+
+    expect(testCookie).toEqual(goodCookie);
+  });
 });
