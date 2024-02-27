@@ -2,9 +2,8 @@ import {OnModuleInit} from '@nestjs/common';
 import { ConnectedSocket, MessageBody, SubscribeMessage, WebSocketGateway, WebSocketServer, WsException } from '@nestjs/websockets';
 import {IncomingMessage} from 'http';
 import WebSocket, {WebSocketServer as WSServer} from 'ws';
-
-import * as cookieParser from 'cookie-parser';
 import {GameService} from './game.service';
+import { CookieUtil } from 'src/cookie-util/cookie-util';
 
 @WebSocketGateway()
 export class PlayGateway implements OnModuleInit {
@@ -16,7 +15,7 @@ export class PlayGateway implements OnModuleInit {
 
   onModuleInit() {
     this.server.on('connection', (ws: WebSocket, req: IncomingMessage) => {
-      const idCookieVal: string|false = this.extractCookieIdFromSocket(req);
+      const idCookieVal: string|false = CookieUtil.extractSignedCookie(req.headers.cookie, 'cookie_id', process.env.COOKIE_SECRET);
 
       if(idCookieVal) {
         this.playerCache.set(ws, idCookieVal);
@@ -45,15 +44,6 @@ export class PlayGateway implements OnModuleInit {
     }
   }
 
-  private extractCookieIdFromSocket(req: IncomingMessage): string|false {
-    const cookie: string = req.headers.cookie || "";
-    const cookies: string[] = cookie.split('; ');
-    const idCookie: string|false = cookies.find(cookie => cookie.startsWith('cookie_id'));
-    const signedIdCookieVal: string|false = idCookie && idCookie.split('=')[1].replace('s%3A', 's:');
-    const idCookieVal: string|false = signedIdCookieVal && cookieParser.signedCookie(signedIdCookieVal, process.env.COOKIE_SECRET);
-
-    return idCookieVal;
-  }
 
   @SubscribeMessage('ping')
   ping(@ConnectedSocket() client: WebSocket): string {
