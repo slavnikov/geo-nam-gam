@@ -1,11 +1,11 @@
 import {INestApplication} from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 import { PlayGateway } from './play.gateway';
 import {WsAdapter} from '@nestjs/platform-ws';
 import {GameService} from './game.service';
 import {WebSocket} from 'ws';
 import {setTimeout} from 'timers/promises';
-import {GameModule} from './game.module';
 
 describe('PlayGateway', () => {
   const gameService_mock = {
@@ -18,7 +18,8 @@ describe('PlayGateway', () => {
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [PlayGateway, GameService],
+      imports: [ ConfigModule.forRoot({envFilePath: '.test.env'}) ],
+      providers: [ PlayGateway, GameService ],
     })
     .overrideProvider(GameService)
     .useValue(gameService_mock)
@@ -30,10 +31,6 @@ describe('PlayGateway', () => {
     app.useWebSocketAdapter(new WsAdapter(app));
      
     await app.listen(3000, '127.0.1.1');
-    const val = await app.getUrl();
-
-    await setTimeout(1000);
-    console.log(val);
   });
 
   afterAll(() => {
@@ -44,22 +41,5 @@ describe('PlayGateway', () => {
   it('should be defined', () => {
     console.log("First Test");
     expect(gateway).toBeDefined();
-  });
-  
-  it('should echo a WebScoket request', async () => {
-    clientSocket = new WebSocket('http://127.0.1.1:3000');
-    clientSocket.on('open', () => console.log('Client WS Open!'))
-    clientSocket.on('close', (code, buffer) => console.log(code, buffer.toString()))
-    console.log("Second Test");
-    //clientSocket.ping("ping", false, (err) => console.log(err));
-    await setTimeout(4000);
-  });
-  it('should echo a WebScoket request', async () => {
-    clientSocket = new WebSocket('http://127.0.1.1:3000');
-    clientSocket.on('open', () => console.log('Client WS Open!'))
-    clientSocket.on('close', (code, buffer) => console.log(code, buffer.toString()))
-    console.log("Third Test");
-    //clientSocket.ping("ping", false, (err) => console.log(err));
-    await setTimeout(4000);
   });
 });

@@ -3,7 +3,7 @@ import { ConnectedSocket, MessageBody, SubscribeMessage, WebSocketGateway, WebSo
 import {IncomingMessage} from 'http';
 import WebSocket, {WebSocketServer as WSServer} from 'ws';
 import {GameService} from './game.service';
-import { CookieUtil } from 'src/cookie-util/cookie-util';
+import { CookieUtil } from '../cookie-util/cookie-util';
 
 @WebSocketGateway()
 export class PlayGateway implements OnModuleInit {
