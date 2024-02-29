@@ -15,12 +15,13 @@ export class PlayGateway implements OnModuleInit {
 
   onModuleInit() {
     this.server.on('connection', (ws: WebSocket, req: IncomingMessage) => {
-      const idCookieVal: string|false = CookieUtil.extractSignedCookie(req.headers.cookie, 'cookie_id', process.env.COOKIE_SECRET);
+      const headerCookie = req?.headers?.cookie || '';
+      const idCookieVal: string|false = CookieUtil.extractSignedCookie(headerCookie, 'cookie_id', process.env.COOKIE_SECRET);
 
       if(idCookieVal) {
         this.playerCache.set(ws, idCookieVal);
       } else {
-        ws.close();
+        ws.close(1011, "Failed to identify connecting user.");
         throw new WsException('Failed to establish connection identity;');
       }
     });

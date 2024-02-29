@@ -5,14 +5,12 @@ import { PlayGateway } from './play.gateway';
 import {WsAdapter} from '@nestjs/platform-ws';
 import {GameService} from './game.service';
 import {WebSocket} from 'ws';
-import {setTimeout} from 'timers/promises';
 
 describe('PlayGateway', () => {
   const gameService_mock = {
     leavePlay: () => {},
     joinGame: () => {},
   };
-  let clientSocket: WebSocket;
   let gateway: PlayGateway;
   let app: INestApplication;
 
@@ -34,12 +32,23 @@ describe('PlayGateway', () => {
   });
 
   afterAll(() => {
-    console.log("Closing app!!!");
     app.close();
   });
 
   it('should be defined', () => {
-    console.log("First Test");
     expect(gateway).toBeDefined();
+  });
+
+  it('should be able to detect a socket connection request', async () => {
+    const resWaiter: boolean = await new Promise<boolean>((resolve, _) => {
+      const clientSocket = new WebSocket('http://127.0.1.1:3000');
+
+      clientSocket.on('open', () => {
+        resolve(true);
+      });
+      setTimeout(() => resolve(false), 1000)
+    });
+
+    expect(resWaiter).toBeTruthy();
   });
 });
