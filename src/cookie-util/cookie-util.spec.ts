@@ -40,4 +40,11 @@ describe('CookieUtil', () => {
     expect(testCookieVal).toStrictEqual(false);
     expect(testCookieVal2).toStrictEqual(false);
   });
+
+  it('should return false if the cookie has been removed', () => {
+    const rawCookie: string = ` cookie_id; foo = bar;`;
+    const testCookieVal:string|false = CookieUtil.extractSignedCookie(rawCookie, 'cookie_id', 'T3$+_3^/v')
+
+    expect(testCookieVal).toStrictEqual(false);
+  });
 });

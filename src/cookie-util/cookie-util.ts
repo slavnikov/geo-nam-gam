@@ -18,12 +18,16 @@ export class CookieUtil {
   }
 
   static extractSignedCookie(rawCookie:string, cookieKey:string, secretKey:string): string|false {
-    const cookies: string[] = rawCookie.split('; ');
-    const neededCookie: string|false = cookies.find(cookie => cookie.trim().startsWith(cookieKey));
-    const cookieRawVal: string|false = neededCookie && neededCookie.split('=')[1].trim();
-    const cookieValAndSign: string|false = cookieRawVal && this.removeNonASCIIChars(cookieRawVal);
-    const cookieVal: string|false = cookieValAndSign && cookieParser.signedCookie(cookieValAndSign, secretKey);
+    try {
+      const cookies: string[] = rawCookie.split(';');
+      const neededCookie: string = cookies.find(cookie => cookie.trim().startsWith(cookieKey));
+      const cookieRawVal: string = neededCookie.split('=')[1].trim();
+      const cookieValAndSign: string = this.removeNonASCIIChars(cookieRawVal);
+      const cookieVal: string|false = cookieParser.signedCookie(cookieValAndSign, secretKey);
 
-    return cookieVal !== cookieValAndSign && cookieVal;
+      return cookieVal !== cookieValAndSign && cookieVal;
+    } catch (_) {
+      return false;
+    }
   }
 }
