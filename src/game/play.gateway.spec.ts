@@ -11,6 +11,8 @@ describe('PlayGateway', () => {
     leavePlay: () => {},
     joinGame: () => {},
   };
+  const guid = '8c48fcfa-065e-4955-a61a-e43613015f12';
+  const rawCookieVal = `s%3A${guid}.A1qK%2BSYNy%2F83y0GT3J1cJvu09fwp63aXLsI%2FUk0z2G8`;
   let gateway: PlayGateway;
   let app: INestApplication;
 
@@ -82,9 +84,7 @@ describe('PlayGateway', () => {
   });
 
   it('should stay open if connected with a valid cookie', async() => {
-    const playerCacheSetter = jest.spyOn(gateway.playerCache, 'set');
     const resWaiter: boolean = await new Promise<boolean>((resolve, _) => {
-      const rawCookieVal = 's%3A8c48fcfa-065e-4955-a61a-e43613015f12.A1qK%2BSYNy%2F83y0GT3J1cJvu09fwp63aXLsI%2FUk0z2G8';
       const clientSocket = new WebSocket('http://127.0.1.1:3000', {headers: {cookie: `cookie_id=${rawCookieVal};`}});
       let stayedOpen: boolean = false;
 
@@ -98,6 +98,28 @@ describe('PlayGateway', () => {
     });
 
     expect(resWaiter).toBeTruthy();
-    expect(playerCacheSetter).toHaveBeenCalledTimes(1);
+  });
+
+  it('should recognize the connected websocket', async() => {
+    const msg: string = JSON.stringify({event:'ping'});
+    const resWaiter: boolean = await new Promise<boolean>((resolve, _) => {
+      const clientSocket = new WebSocket('http://127.0.1.1:3000', {headers: {cookie: `cookie_id=${rawCookieVal};`}});
+
+      clientSocket.on('open', () => {
+        clientSocket.send(msg);
+      });
+      clientSocket.on('message', (res) => {
+        const ping: string = JSON.parse(res.toString());
+
+        if(ping === guid)
+          resolve(true);
+      });
+      setTimeout(() => {
+        clientSocket.close();
+        resolve(false);
+      }, 1000)
+    });
+
+    expect(resWaiter).toBeTruthy();
   });
 });

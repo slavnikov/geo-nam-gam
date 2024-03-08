@@ -8,8 +8,8 @@ import { CookieUtil } from '../cookie-util/cookie-util';
 @WebSocketGateway()
 export class PlayGateway implements OnModuleInit {
   @WebSocketServer()
-  server: WSServer;
-  playerCache: Map<WebSocket, string> = new Map();
+  private server: WSServer;
+  private playerCache: Map<WebSocket, string> = new Map();
 
   constructor(private gameService: GameService) { }
 
@@ -50,7 +50,6 @@ export class PlayGateway implements OnModuleInit {
   ping(@ConnectedSocket() client: WebSocket): string {
     const playerCookie = this.playerCache.get(client);
 
-    console.log(`Pinging back to '${playerCookie}'`);
     return playerCookie;
   }
 
