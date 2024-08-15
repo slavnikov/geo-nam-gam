@@ -1,5 +1,5 @@
 import {OnModuleInit} from '@nestjs/common';
-import { ConnectedSocket, MessageBody, SubscribeMessage, WebSocketGateway, WebSocketServer, WsException } from '@nestjs/websockets';
+import { ConnectedSocket, MessageBody, SubscribeMessage, WebSocketGateway, WebSocketServer} from '@nestjs/websockets';
 import {IncomingMessage} from 'http';
 import WebSocket, {WebSocketServer as WSServer} from 'ws';
 import {GameService} from './game.service';
@@ -16,14 +16,14 @@ export class PlayGateway implements OnModuleInit {
   onModuleInit() {
     this.server.on('connection', (ws: WebSocket, req: IncomingMessage) => {
       const headerCookie = req?.headers?.cookie || '';
-      const idCookieVal: string|false = CookieUtil.extractSignedCookie(headerCookie, 'cookie_id', process.env.COOKIE_SECRET);
+      const idCookieVal: string|false = CookieUtil.extractSignedCookie(headerCookie,
+                                                                       'cookie_id',
+                                                                       process.env.COOKIE_SECRET);
 
-      if(idCookieVal) {
+      if(idCookieVal)
         this.playerCache.set(ws, idCookieVal);
-      } else {
+      else
         ws.close(1011, "Failed to identify connecting user.");
-        throw new WsException('Failed to establish connection identity;');
-      }
     });
 
     this.server.on('close', (ws: WebSocket) => {
@@ -35,14 +35,10 @@ export class PlayGateway implements OnModuleInit {
   }
 
   @SubscribeMessage('join')
-  joinGame(@ConnectedSocket() playerWs: WebSocket, @MessageBody() gameId: string): void {
-    const playerId = this.playerCache.get(playerWs);
+  joinGame(@ConnectedSocket() client: WebSocket, @MessageBody() gameId: string): void {
+    const playerId = this.playerCache.get(client);
 
-    try {
-      this.gameService.joinGame(gameId, playerId, playerWs)
-    } catch (wsErr: any) {
-      playerWs.send(JSON.stringify({event: 'error'}));
-    }
+    this.gameService.joinGame(gameId, playerId, client)
   }
 
 

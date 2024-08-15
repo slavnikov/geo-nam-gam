@@ -10,8 +10,10 @@ import { join } from 'path';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
+      // set the path of the static files to be served
       rootPath: join(__dirname, '..', 'public'),
     }),
+    // allow the access of env variables by the app
     ConfigModule.forRoot(),
     GameModule,
   ],
@@ -22,6 +24,7 @@ import { join } from 'path';
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
+      // apply the middleware to all routes
       .apply(CookieMandaterMiddleware)
         .forRoutes('*')
   }

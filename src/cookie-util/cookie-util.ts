@@ -1,4 +1,5 @@
 import * as cookieParser from 'cookie-parser';
+import { Request } from 'express';
 
 export class CookieUtil {
   static removeNonASCIIChars(cookie: string): string {
@@ -29,5 +30,9 @@ export class CookieUtil {
     } catch (_) {
       return false;
     }
+  }
+
+  static getRequestingUesrId(request: Request) : string {
+    return request.signedCookies['cookie_id'];
   }
 }

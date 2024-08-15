@@ -1,5 +1,6 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { Request, Response } from 'express';
+import { CookieUtil } from '../cookie-util/cookie-util';
 import { v4 } from 'uuid';
 
 @Injectable()
@@ -12,7 +13,7 @@ export class CookieMandaterMiddleware implements NestMiddleware {
   }
 
   private getCookieId(req: Request): string {
-    const cookieId: string = req.signedCookies['cookie_id'];
+    const cookieId: string = CookieUtil.getRequestingUesrId(req);
 
     return cookieId || v4();
   }
