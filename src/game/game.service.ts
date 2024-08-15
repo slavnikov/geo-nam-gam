@@ -9,16 +9,18 @@ export class GameService {
   private readonly gameCache: Map<string, Game> = new Map();
   private readonly userIdToGame: Map<string, Game> = new Map();
   
-  create(): string {
+  create(clientId: string): string {
     let newGame: Game = new Game();
     
+    // If a game with the same id already exists, generate a new id.
     while(this.gameCache.has(newGame.id))
       newGame = new Game();
 
     this.gameCache.set(newGame.id, newGame);
+    newGame.setOwner(clientId);
     return newGame.id;
   }
-  
+
   joinGame(gameId: string, playerId: string, playerWs: WebSocket) {
     const game: Game = this.gameCache.get(gameId);
 
@@ -39,11 +41,11 @@ export class GameService {
   }
 
   findAll(): string[] {
-    return Object.keys(this.gameCache);
+    return Array.from(this.gameCache.keys());
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} game`;
+  findOne(id: string) : Game|undefined {
+    return this.gameCache.get(id);
   }
 
   update(id: number, updateGameDto: UpdateGameDto) {

@@ -3,6 +3,7 @@ import WebSocket, {WebSocketServer as WSServer} from 'ws';
 
 export class Game {
   public readonly id: string;
+  public ownerId: string;
   public player1ws: WebSocket;
   public player2ws: WebSocket;
   public player1id: string;
@@ -10,6 +11,14 @@ export class Game {
   
   constructor() {
     this.id = v4().substring(0, 5);
+  }
+
+  setOwner(playerId: string) {
+    this.ownerId = playerId;
+  }
+
+  getOwner() {
+    return this.ownerId;
   }
 
   join(playerId: string, playerWs: WebSocket) {

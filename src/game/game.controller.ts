@@ -1,14 +1,18 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Req } from '@nestjs/common';
 import { GameService } from './game.service';
 import { UpdateGameDto } from './dto/update-game.dto';
+import { Request } from 'express';
+import { CookieUtil } from '../cookie-util/cookie-util';
 
 @Controller('game')
 export class GameController {
   constructor(private readonly gameService: GameService) {}
 
   @Post()
-  create(): string {
-    return this.gameService.create();
+  create(@Req() request : Request): string {
+    const clientId = CookieUtil.getRequestingUesrId(request);
+
+    return this.gameService.create(clientId);
   }
 
   @Get()
@@ -18,7 +22,7 @@ export class GameController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.gameService.findOne(+id);
+    return this.gameService.findOne(id);
   }
 
   @Patch(':id')
