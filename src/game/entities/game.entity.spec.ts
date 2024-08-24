@@ -18,9 +18,9 @@ describe('Game', () => {
   });
 
   it('should be able to set and get an owner id', () => {
-    expect(game.ownerId).toBeUndefined();
+    expect(game.getOwner()).toBeUndefined();
     game.setOwner('test');
-    expect(game.ownerId).toBe('test');
+    expect(game.getOwner()).toBe('test');
   });
 
    //it('should be able to join players', () => {

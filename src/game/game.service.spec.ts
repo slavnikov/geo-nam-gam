@@ -51,6 +51,6 @@ describe('GameService', () => {
     const creationRes: string = service.create(clientId);
     const game: Game = service.findOne(creationRes);
 
-    expect(game.ownerId).toBe(clientId);
+    expect(game.getOwner()).toBe(clientId);
   });
 });

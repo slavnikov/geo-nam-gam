@@ -2,7 +2,7 @@ import {v4} from "uuid";
 
 export class Game {
   public readonly id: string;
-  public ownerId: string;
+  private ownerId: string;
   public player1id: string;
   public player2id: string;
   
@@ -14,7 +14,7 @@ export class Game {
     this.ownerId = playerId;
   }
 
-  getOwner() {
+  getOwner(): string {
     return this.ownerId;
   }
 
@@ -24,7 +24,6 @@ export class Game {
     } else if (this.player1id !== playerId) {
       this.player2id = playerId;
     }
-    console.log(`Added player '${playerId}' to game '${this.id}'.`);
   }
 
   leave(playerId: string) {
@@ -34,5 +33,4 @@ export class Game {
       this.player2id = null;
     }
   }
-
 }
