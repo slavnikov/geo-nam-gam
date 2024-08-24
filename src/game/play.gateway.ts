@@ -5,13 +5,13 @@ import WebSocket, {WebSocketServer as WSServer} from 'ws';
 import {GameService} from './game.service';
 import { CookieUtil } from '../cookie-util/cookie-util';
 
-enum GateType {
+enum GateResType {
   GAME_CREATE = 'game/create',
   GAME_JOIN = 'game/join',
 }
 
 interface PlayGatewayRes {
-  resType: GateType;
+  resType: GateResType;
   resData: string;
 }
 
@@ -44,7 +44,7 @@ export class PlayGateway implements OnModuleInit {
     })
   }
 
-  static makeResponse(resType: GateType, resData: string): PlayGatewayRes {
+  static makeResponse(resType: GateResType, resData: string): PlayGatewayRes {
     return {resType, resData};
   }
 
@@ -52,12 +52,12 @@ export class PlayGateway implements OnModuleInit {
     return this.playerCache.get(client);
   }
 
-  @SubscribeMessage(GateType.GAME_CREATE)
+  @SubscribeMessage(GateResType.GAME_CREATE)
   createGame(@ConnectedSocket() client: WebSocket): PlayGatewayRes {
     const playerId: string = this.getClientId(client);
     const newGameId: string = this.gameService.create(playerId);
 
-    return PlayGateway.makeResponse(GateType.GAME_CREATE, newGameId);
+    return PlayGateway.makeResponse(GateResType.GAME_CREATE, newGameId);
   }
 
   @SubscribeMessage('join')

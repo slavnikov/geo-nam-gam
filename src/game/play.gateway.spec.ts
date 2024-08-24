@@ -7,12 +7,16 @@ import {GameService} from './game.service';
 import {WebSocket} from 'ws';
 
 describe('PlayGateway', () => {
+  const guid = '8c48fcfa-065e-4955-a61a-e43613015f12';
+  const rawCookieVal = `s%3A${guid}.A1qK%2BSYNy%2F83y0GT3J1cJvu09fwp63aXLsI%2FUk0z2G8`;
+  const wsIP = '127.0.1.1';
+  const wsPort = 3001;
+  const wsAddress = `http://${wsIP}:${wsPort}`;
   const gameService_mock = {
     leavePlay: () => {},
     joinGame: () => {},
   };
-  const guid = '8c48fcfa-065e-4955-a61a-e43613015f12';
-  const rawCookieVal = `s%3A${guid}.A1qK%2BSYNy%2F83y0GT3J1cJvu09fwp63aXLsI%2FUk0z2G8`;
+
   let gateway: PlayGateway;
   let app: INestApplication;
 
@@ -30,7 +34,7 @@ describe('PlayGateway', () => {
     app = module.createNestApplication();
     app.useWebSocketAdapter(new WsAdapter(app));
      
-    await app.listen(3000, '127.0.1.1');
+    await app.listen(wsPort, wsIP);
   });
 
   afterAll(() => {
@@ -43,7 +47,7 @@ describe('PlayGateway', () => {
 
   it('should be able to detect a socket connection request', async () => {
     const resWaiter: boolean = await new Promise<boolean>((resolve, _) => {
-      const clientSocket = new WebSocket('http://127.0.1.1:3000');
+      const clientSocket = new WebSocket(wsAddress);
 
       clientSocket.on('open', () => {
         resolve(true);
@@ -56,7 +60,7 @@ describe('PlayGateway', () => {
 
   it('should close a socket opened without a cookie', async() => {
     const resWaiter: boolean = await new Promise<boolean>((resolve, _) => {
-      const clientSocket = new WebSocket('http://127.0.1.1:3000');
+      const clientSocket = new WebSocket(wsAddress);
 
       clientSocket.on('close', (code:number) => {
         if(code === 1011)
@@ -71,7 +75,7 @@ describe('PlayGateway', () => {
   it('should close a socket opened with a tampered cookie', async() => {
     const resWaiter: boolean = await new Promise<boolean>((resolve, _) => {
       const rawCookieVal = 's%3A8c48fcfa-065e-4955-a61a-e43613015f12.B1qK%2BSYNy%2F83y0GT3J1cJvu09fwp63aXLsI%2FUk0z2G8';
-      const clientSocket = new WebSocket('http://127.0.1.1:3000', {headers: {cookie: `cookie_id=${rawCookieVal};`}});
+      const clientSocket = new WebSocket(wsAddress, {headers: {cookie: `cookie_id=${rawCookieVal};`}});
 
       clientSocket.on('close', (code:number) => {
         if(code === 1011)
@@ -85,7 +89,7 @@ describe('PlayGateway', () => {
 
   it('should stay open if connected with a valid cookie', async() => {
     const resWaiter: boolean = await new Promise<boolean>((resolve, _) => {
-      const clientSocket = new WebSocket('http://127.0.1.1:3000', {headers: {cookie: `cookie_id=${rawCookieVal};`}});
+      const clientSocket = new WebSocket(wsAddress, {headers: {cookie: `cookie_id=${rawCookieVal};`}});
       let stayedOpen: boolean = false;
 
       clientSocket.on('close', () => {
@@ -103,7 +107,7 @@ describe('PlayGateway', () => {
   it('should recognize the connected websocket', async() => {
     const msg: string = JSON.stringify({event:'ping'});
     const resWaiter: boolean = await new Promise<boolean>((resolve, _) => {
-      const clientSocket = new WebSocket('http://127.0.1.1:3000', {headers: {cookie: `cookie_id=${rawCookieVal};`}});
+      const clientSocket = new WebSocket(wsAddress, {headers: {cookie: `cookie_id=${rawCookieVal};`}});
 
       clientSocket.on('open', () => {
         clientSocket.send(msg);
