@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import {WsException} from '@nestjs/websockets';
-import WebSocket from 'ws';
 import { UpdateGameDto } from './dto/update-game.dto';
 import { Game } from './entities/game.entity';
 
