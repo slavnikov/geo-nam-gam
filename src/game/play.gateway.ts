@@ -60,7 +60,7 @@ export class PlayGateway implements OnModuleInit {
     return PlayGateway.makeResponse(GateResType.GAME_CREATE, newGameId);
   }
 
-  @SubscribeMessage('join')
+  @SubscribeMessage(GateResType.GAME_JOIN)
   joinGame(@ConnectedSocket() client: WebSocket, @MessageBody() gameId: string): void {
     const playerId = this.playerCache.get(client);
 

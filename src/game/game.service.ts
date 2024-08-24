@@ -11,7 +11,7 @@ export class GameService {
   create(clientId: string): string {
     let newGame: Game = new Game();
     
-    // If a game with the same id already exists, generate a new id.
+    // If a game with the same id already exists, generate a new game.
     while(this.gameCache.has(newGame.id))
       newGame = new Game();
 

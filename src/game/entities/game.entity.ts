@@ -2,15 +2,19 @@ import {v4} from "uuid";
 
 export class Game {
   public readonly id: string;
+  private readonly players: string[] = new Array();
+  private readonly maxPlayers: number;
   private ownerId: string;
-  public player1id: string;
-  public player2id: string;
   
   constructor() {
     this.id = v4().substring(0, 5);
+    this.maxPlayers = 2;
   }
 
   setOwner(playerId: string): void {
+    if(!this.hasPlayer(playerId)) {
+      throw new Error('Player is not in the game');
+    }
     this.ownerId = playerId;
   }
 
@@ -18,19 +22,23 @@ export class Game {
     return this.ownerId;
   }
 
+  getPlayerSet(): Set<string> {
+    return new Set(this.players);
+  }
+
+  hasPlayer(playerId: string): boolean {
+    return this.getPlayerSet().has(playerId);
+  }
+
   join(playerId: string) {
-    if(!this.player1id) {
-      this.player1id = playerId;
-    } else if (this.player1id !== playerId) {
-      this.player2id = playerId;
+    if(this.players.length < this.maxPlayers) {
+      this.players.push(playerId);
+    } else {
+      throw new Error('Game is full');
     }
   }
 
   leave(playerId: string) {
-    if(this.player1id === playerId) {
-      this.player1id = null;
-    } else if (this.player2id === playerId) {
-      this.player2id = null;
-    }
+    throw new Error('Not implemented');
   }
 }
