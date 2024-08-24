@@ -31,10 +31,13 @@ export class Game {
   }
 
   join(playerId: string) {
-    if(this.players.length < this.maxPlayers) {
-      this.players.push(playerId);
-    } else {
-      throw new Error('Game is full');
+    switch(true) {
+      case this.players.length >= this.maxPlayers:
+        throw new Error('Game is full');
+      case this.hasPlayer(playerId):
+        throw new Error('Player is already in the game');
+      default:
+        this.players.push(playerId);
     }
   }
 

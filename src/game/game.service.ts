@@ -16,7 +16,7 @@ export class GameService {
       newGame = new Game();
 
     this.registerGame(newGame);
-    newGame.join(clientId);
+    this.joinGame(newGame.id, clientId);
     newGame.setOwner(clientId);
     return newGame.id;
   }
@@ -26,15 +26,15 @@ export class GameService {
 
     if(!game)
       throw new WsException('Failed to find game by id.');
-    if(this.userIdToGame.has(playerId))
+    if(this.getUsersGame(playerId))
       throw new WsException('User cannot join more than one game at a time.');
 
     game.join(playerId);
-    this.userIdToGame.set(playerId, game);
+    this.registerUserToGame(playerId, game);
   }
 
   leavePlay(playerId: string) {
-    const game: Game|undefined = this.userIdToGame.get(playerId);
+    const game: Game|undefined = this.getUsersGame(playerId);
 
     if(game)
       game.leave(playerId);
@@ -42,6 +42,14 @@ export class GameService {
 
   private registerGame(game: Game): void {
     this.gameCache.set(game.id, game);
+  }
+
+  private registerUserToGame(playerId: string, gameId: Game): void {
+    this.userIdToGame.set(playerId, gameId);
+  }
+
+  getUsersGame(playerId: string): Game|undefined {
+    return this.userIdToGame.get(playerId);
   }
 
   findAll(): string[] {

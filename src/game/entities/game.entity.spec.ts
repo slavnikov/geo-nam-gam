@@ -40,23 +40,8 @@ describe('Game', () => {
     expect(() => game.setOwner('player1')).toThrowError('Player is not in the game');
   });
 
-   //it('should be able to join players', () => {
-     //expect(game.player1id).toBeUndefined();
-     //expect(game.player2id).toBeUndefined();
-     //game.join('player1', null);
-     //expect(game.player1id).toBe('player1');
-     //expect(game.player2id).toBeUndefined();
-     //game.join('player2', null);
-     //expect(game.player1id).toBe('player1');
-     //expect(game.player2id).toBe('player2');
-   //});
- //
-   //it('should be able to remove players', () => {
-     //game.join('player1', null);
-     //game.join('player2', null);
-     //game.leave('player1');
-     //expect(game.player1id).toBeNull();
-     //game.leave('player2');
-     //expect(game.player2id).toBeNull();
-   //});
+  it('should error when a user attempts to join the same game twice', () => {
+    game.join('player1');
+    expect(() => game.join('player1')).toThrowError('Player is already in the game');
+  });
 });

@@ -23,9 +23,9 @@ describe('GameService', () => {
   });
 
   it('should add created games to the cache', () => {
-    const creationRes1 = service.create(clientId);
-    const creationRes2 = service.create(clientId);
-    const creationRes3 = service.create(clientId);
+    const creationRes1 = service.create("foo");
+    const creationRes2 = service.create("bar");
+    const creationRes3 = service.create("baz");
 
     expect(service.findAll()).toHaveLength(3);
 
@@ -47,10 +47,36 @@ describe('GameService', () => {
     expect(service.findAll()).toContain(creationRes);
   });
 
-  it('should set the owner of the game to the client id', () => {
+  it('should set the owner of the game to the client id of the creator', () => {
     const creationRes: string = service.create(clientId);
     const game: Game = service.findOne(creationRes);
 
     expect(game.getOwner()).toBe(clientId);
+  });
+
+  it('should register a user to a game when the user creates the game', () => {
+    const creationRes: string = service.create(clientId);
+    const game: Game = service.findOne(creationRes);
+
+    expect(service.getUsersGame(clientId)).toBe(game);
+  });
+
+  it('should register a user to a game when the user joins the game', () => {
+    const creationRes: string = service.create(clientId);
+    const game: Game = service.findOne(creationRes);
+
+    service.joinGame(creationRes, 'anotherUser');
+    expect(service.getUsersGame('anotherUser')).toBe(game);
+  });
+
+  it('should throw an exception when a user tries to join more than one game', () => {
+    const creationRes1: string = service.create(clientId);
+    service.create('anotherUser');
+
+    expect(() => service.joinGame(creationRes1, 'anotherUser')).toThrow();
+  });
+
+  it('should thow an exception when a user tries to join a non-existent game', () => {
+    expect(() => service.joinGame('non-existent-game', 'anotherUser')).toThrow();
   });
 });
