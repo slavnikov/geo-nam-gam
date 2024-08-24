@@ -48,7 +48,7 @@ describe('PlayGateway', () => {
       clientSocket.on('open', () => {
         resolve(true);
       });
-      setTimeout(() => resolve(false), 1000)
+      setTimeout(() => resolve(false), 1000).unref();
     });
 
     expect(resWaiter).toBeTruthy();
@@ -62,7 +62,7 @@ describe('PlayGateway', () => {
         if(code === 1011)
           resolve(true);
       });
-      setTimeout(() => resolve(false), 1000)
+      setTimeout(() => resolve(false), 1000).unref();
     });
 
     expect(resWaiter).toBeTruthy();
@@ -77,7 +77,7 @@ describe('PlayGateway', () => {
         if(code === 1011)
           resolve(true);
       });
-      setTimeout(() => resolve(false), 1000)
+      setTimeout(() => resolve(false), 1000).unref();
     });
 
     expect(resWaiter).toBeTruthy();
@@ -117,7 +117,7 @@ describe('PlayGateway', () => {
       setTimeout(() => {
         clientSocket.close();
         resolve(false);
-      }, 1000)
+      }, 1000).unref();
     });
 
     expect(resWaiter).toBeTruthy();
