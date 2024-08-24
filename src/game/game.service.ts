@@ -16,12 +16,13 @@ export class GameService {
     while(this.gameCache.has(newGame.id))
       newGame = new Game();
 
-    this.gameCache.set(newGame.id, newGame);
+    this.registerGame(newGame);
+    newGame.join(clientId);
     newGame.setOwner(clientId);
     return newGame.id;
   }
 
-  joinGame(gameId: string, playerId: string, playerWs: WebSocket) {
+  joinGame(gameId: string, playerId: string) {
     const game: Game = this.gameCache.get(gameId);
 
     if(!game)
@@ -29,7 +30,7 @@ export class GameService {
     if(this.userIdToGame.has(playerId))
       throw new WsException('User cannot join more than one game at a time.');
 
-    game.join(playerId, playerWs);
+    game.join(playerId);
     this.userIdToGame.set(playerId, game);
   }
 
@@ -38,6 +39,10 @@ export class GameService {
 
     if(game)
       game.leave(playerId);
+  }
+
+  private registerGame(game: Game): void {
+    this.gameCache.set(game.id, game);
   }
 
   findAll(): string[] {

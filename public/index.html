@@ -3,6 +3,7 @@
     <head>
         <title>Geo-Nam-Gam</title>
         <script>
+            let ws = null;
             function openGameWs () {
               return new Promise((resolve, reject) => {
                 const gameWs = new WebSocket('ws://localhost:3000');
@@ -17,6 +18,8 @@
                   console.log('Established connection!');
                   resolve(gameWs);
                 });
+                listenForMsg(gameWs);
+                ws = gameWs;
               });
             }
             const signalWsOpen = (ws) => {
@@ -39,11 +42,8 @@
             }
 
             const createGame = async () => {
-              const res = await fetch('/game', {method: "POST"});
-              const gameId = await res.text();
-
-              document.getElementById('gameId').innerHTML = gameId;
-              console.log(gameId);
+              const createMsg = { event: "game/create" };
+              ws.send(JSON.stringify(createMsg));
             }
 
             const joinGame = async (gameId) => {
@@ -57,6 +57,7 @@
     </head>
     <body>
         <h1>geo-nam-gam</h1>
+        <button id="wsConnect">CONNECT!</button>
         <button id="pingButton">PING!</button>
         <input type="text" id="echoInput"/>
         <button id="echoButton">ECHO!</button>
@@ -65,6 +66,7 @@
         <button id="joinGameButton">Join Game!</button>
 
         <script>
+            document.getElementById('wsConnect').addEventListener('click', openGameWs);
             document.getElementById('pingButton').addEventListener('click', ping);
             document.getElementById('echoButton').addEventListener('click', () => echo(document));
             document.getElementById('createGameButton').addEventListener('click', createGame.bind(this));

@@ -34,11 +34,23 @@ export class PlayGateway implements OnModuleInit {
     })
   }
 
+  private getClientId(client: WebSocket): string {
+    return this.playerCache.get(client);
+  }
+
+  @SubscribeMessage('game/create')
+  createGame(@ConnectedSocket() client: WebSocket): string {
+    const playerId: string = this.getClientId(client);
+    const newGameId: string = this.gameService.create(playerId);
+
+    return newGameId;
+  }
+
   @SubscribeMessage('join')
   joinGame(@ConnectedSocket() client: WebSocket, @MessageBody() gameId: string): void {
     const playerId = this.playerCache.get(client);
 
-    this.gameService.joinGame(gameId, playerId, client)
+    this.gameService.joinGame(gameId, playerId)
   }
 
 
