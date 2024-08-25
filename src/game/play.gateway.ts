@@ -4,16 +4,7 @@ import {IncomingMessage} from 'http';
 import WebSocket, {WebSocketServer as WSServer} from 'ws';
 import {GameService} from './game.service';
 import { CookieUtil } from '../cookie-util/cookie-util';
-
-enum GateResType {
-  GAME_CREATE = 'game/create',
-  GAME_JOIN = 'game/join',
-}
-
-interface PlayGatewayRes {
-  resType: GateResType;
-  resData: string;
-}
+import { GateResType, CreateGameRes, JoinGameRes, PlayGateType } from './res-types/play-gate-res.types';
 
 @WebSocketGateway()
 export class PlayGateway implements OnModuleInit {
@@ -44,35 +35,30 @@ export class PlayGateway implements OnModuleInit {
     })
   }
 
-  static makeResponse(resType: GateResType, resData: string): PlayGatewayRes {
-    return {resType, resData};
-  }
-
   private getClientId(client: WebSocket): string {
     return this.playerCache.get(client);
   }
 
-  @SubscribeMessage(GateResType.GAME_CREATE)
-  createGame(@ConnectedSocket() client: WebSocket): PlayGatewayRes {
+  @SubscribeMessage(PlayGateType.CREATE_GAME)
+  createGame(@ConnectedSocket() client: WebSocket): CreateGameRes {
     const playerId: string = this.getClientId(client);
     const newGameId: string = this.gameService.create(playerId);
 
-    return PlayGateway.makeResponse(GateResType.GAME_CREATE, newGameId);
+    return {resType: GateResType.GAME_CREATE, resData:newGameId};
   }
 
-  @SubscribeMessage(GateResType.GAME_JOIN)
-  joinGame(@ConnectedSocket() client: WebSocket, @MessageBody() gameId: string): void {
+  @SubscribeMessage(PlayGateType.JOIN_GAME)
+  joinGame(@ConnectedSocket() client: WebSocket, @MessageBody() gameId: string): JoinGameRes {
     const playerId = this.playerCache.get(client);
 
     this.gameService.joinGame(gameId, playerId)
+    return {resType: GateResType.GAME_JOIN};
   }
 
 
   @SubscribeMessage('ping')
   ping(@ConnectedSocket() client: WebSocket): string {
-    const playerCookie = this.playerCache.get(client);
-
-    return playerCookie;
+    return this.playerCache.get(client);
   }
 
   @SubscribeMessage('echo')
