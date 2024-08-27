@@ -6,6 +6,7 @@ import { CookieMandaterMiddleware } from './cookie-mandater/cookie-mandater.midd
 import { GameModule } from './game/game.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { join } from 'path';
     // allow the access of env variables by the app
     ConfigModule.forRoot(),
     GameModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

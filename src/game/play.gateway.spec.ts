@@ -5,6 +5,7 @@ import { PlayGateway } from './play.gateway';
 import {WsAdapter} from '@nestjs/platform-ws';
 import {GameService} from './game.service';
 import {WebSocket} from 'ws';
+import {UserService} from '../user/user.service';
 
 describe('PlayGateway', () => {
   const guid = '8c48fcfa-065e-4955-a61a-e43613015f12';
@@ -23,7 +24,7 @@ describe('PlayGateway', () => {
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [ ConfigModule.forRoot({envFilePath: '.test.env'}) ],
-      providers: [ PlayGateway, GameService ],
+      providers: [ PlayGateway, GameService, UserService ],
     })
     .overrideProvider(GameService)
     .useValue(gameService_mock)
