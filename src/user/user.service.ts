@@ -15,7 +15,7 @@ export class UserService {
     return user;
   }
 
-  public getUserFromSocket(socket: WebSocket): User {
+  public getUserFromSocket(socket: WebSocket): User|undefined {
     return this.socketToUser.get(socket);
   }
 

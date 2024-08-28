@@ -16,3 +16,5 @@ export interface CreateGameRes {
 export interface JoinGameRes {
   resType: GateResType.GAME_JOIN;
 }
+
+export type PlayGateRes = CreateGameRes | JoinGameRes;
