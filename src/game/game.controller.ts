@@ -3,6 +3,7 @@ import { GameService } from './game.service';
 import { UpdateGameDto } from './dto/update-game.dto';
 import { Request } from 'express';
 import { CookieUtil } from '../cookie-util/cookie-util';
+import { User } from '../user/entities/user.entity';
 
 @Controller('game')
 export class GameController {
@@ -12,7 +13,7 @@ export class GameController {
   create(@Req() request : Request): string {
     const clientId = CookieUtil.getRequestingUesrId(request);
 
-    return this.gameService.create(clientId);
+    return this.gameService.userCreateGame(new User(clientId));
   }
 
   @Get()

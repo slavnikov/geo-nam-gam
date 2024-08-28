@@ -1,47 +1,48 @@
 import {v4} from "uuid";
+import { User } from "../../user/entities/user.entity";
 
 export class Game {
   public readonly id: string;
-  private readonly players: string[] = new Array();
+  private readonly players: User[] = new Array();
   private readonly maxPlayers: number;
-  private ownerId: string;
+  private owner: User;
   
   constructor() {
     this.id = v4().substring(0, 5);
     this.maxPlayers = 2;
   }
 
-  setOwner(playerId: string): void {
-    if(!this.hasPlayer(playerId)) {
+  setOwner(player: User): void {
+    if(!this.hasPlayer(player)) {
       throw new Error('Player is not in the game');
     }
-    this.ownerId = playerId;
+    this.owner = player;
   }
 
-  getOwner(): string {
-    return this.ownerId;
+  getOwner(): User {
+    return this.owner;
   }
 
-  getPlayerSet(): Set<string> {
+  getPlayerSet(): Set<User> {
     return new Set(this.players);
   }
 
-  hasPlayer(playerId: string): boolean {
-    return this.getPlayerSet().has(playerId);
+  hasPlayer(player: User): boolean {
+    return this.getPlayerSet().has(player);
   }
 
-  join(playerId: string) {
+  join(player: User) {
     switch(true) {
       case this.players.length >= this.maxPlayers:
         throw new Error('Game is full');
-      case this.hasPlayer(playerId):
+      case this.hasPlayer(player):
         throw new Error('Player is already in the game');
       default:
-        this.players.push(playerId);
+        this.players.push(player);
     }
   }
 
-  leave(playerId: string) {
+  leave(_: User) {
     throw new Error('Not implemented');
   }
 }

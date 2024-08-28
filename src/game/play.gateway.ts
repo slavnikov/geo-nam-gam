@@ -33,7 +33,7 @@ export class PlayGateway implements OnModuleInit {
       const user: User = this.userService.getUserFromSocket(ws);
 
       if(user) {
-        this.gameService.leavePlay(user.id);
+        this.gameService.leavePlay(user);
         this.userService.disconnectUserSocket(ws);
       }
     })
@@ -41,17 +41,17 @@ export class PlayGateway implements OnModuleInit {
 
   @SubscribeMessage(PlayGateType.CREATE_GAME)
   createGame(@ConnectedSocket() client: WebSocket): CreateGameRes {
-    const playerId: string = this.userService.getUserFromSocket(client).id;
-    const newGameId: string = this.gameService.create(playerId);
+    const player: User = this.userService.getUserFromSocket(client);
+    const newGameId: string = this.gameService.userCreateGame(player);
 
     return {resType: GateResType.GAME_CREATE, resData:newGameId};
   }
 
   @SubscribeMessage(PlayGateType.JOIN_GAME)
   joinGame(@ConnectedSocket() client: WebSocket, @MessageBody() gameId: string): JoinGameRes {
-    const playerId: string = this.userService.getUserFromSocket(client).id;
+    const player: User = this.userService.getUserFromSocket(client);
 
-    this.gameService.joinGame(gameId, playerId)
+    this.gameService.joinGame(gameId, player)
     return {resType: GateResType.GAME_JOIN};
   }
 
